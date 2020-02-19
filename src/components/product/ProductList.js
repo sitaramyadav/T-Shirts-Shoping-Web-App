@@ -12,25 +12,19 @@ const ProductListCataloge = styled.ul`
   justify-content: space-around;
 `;
 
-export const ProductList = ({ products }) => {
-  console.log(products, "from produvtl lsit");
+export const ProductList = ({ store, addProductIntoCartHandler }) => {
   return (
     <MainContainer>
       <ProductListCataloge>
-        {products &&
-          products.map((product, index) => {
-            return (
-              <Product
-                key={`${product.id}${index}`}
-                name={product.name}
-                image={product.src_1}
-                price={product.price}
-                currencyFormat={product.currencyFormat}
-                isFreeShipping={product.isFreeShipping}
-                title={product.title}
-              />
-            );
-          })}
+        {store.products.map((product, index) => {
+          return (
+            <Product
+              key={`${product.id}${index}`}
+              product={product}
+              addProductIntoCartHandler={addProductIntoCartHandler}
+            />
+          );
+        })}
       </ProductListCataloge>
     </MainContainer>
   );
