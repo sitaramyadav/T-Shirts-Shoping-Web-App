@@ -5,10 +5,8 @@ import cartIcon from "../../../images/icons/cart.png";
 
 const HeaderContainer = styled.header`
   display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid black;
+  justify-content: flex-end;
   margin: 10px 50px;
-  background-color: black;
   height: 100%;
 `;
 
@@ -20,10 +18,10 @@ const CartIcon = styled.img`
 const CartIconContainer = styled.picture`
   height: 100%;
   widht: 50%;
+  background-color: black;
 `;
 
 export const Header = ({ toggleCartModal }) => {
-  const [showModel, setShowModel] = useState(false);
   return (
     <HeaderContainer>
       <CartIconContainer>
