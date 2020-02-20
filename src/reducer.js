@@ -20,28 +20,19 @@ export function reducer(state, action) {
 
     case SORT_PRODUCT_BY_SIZES: {
       let products = [...state.products];
-      console.log(products, "befoer sort");
       orderBySize(products, action.payload.size);
-      console.log("after sort", "befoer sort");
-      products.reverse();
       return {
         ...state,
         products
       };
     }
     case UPDATE_CART: {
-      const products = updateCartModalOnChange(state, action.payload);
-      const { vat, subTotal, totalCostIncludingVat } = cartProductComputation(
-        products
-      );
+      const products = [...state.products];
+      orderByPrice(products, action.payload.orderBy);
+      products.reverse();
       return {
         ...state,
-        cart: {
-          products,
-          vat,
-          subTotal,
-          totalCostIncludingVat
-        }
+        products
       };
     }
     case REMOVE_ITEM:
@@ -67,18 +58,6 @@ export function reducer(state, action) {
     default:
       throw new Error();
   }
-}
-
-function filterCommonProduct(products) {
-  const common = products[0];
-  return products.filter(each => {
-    if (common.title === each.title) {
-      each.quantity = each.quantity + 1;
-      each.totalCost = each.price + each.quantity;
-    } else {
-      return each;
-    }
-  });
 }
 
 function cartProductComputation(products) {
@@ -130,19 +109,28 @@ function removeProduct(products, productId) {
 }
 
 function orderBySize(products, size) {
-  products.sort(function(firstProduct, secondProduct) {
+  products.sort((firstProduct, secondProduct) => {
     if (
-      !firstProduct.availableSizes.includes(size) &&
-      secondProduct.availableSizes.includes(size)
+      firstProduct.availableSizes.includes(size) &&
+      !secondProduct.availableSizes.includes(size)
     ) {
       return -1;
     }
     if (
-      !firstProduct.availableSizes.includes(size) &&
-      !secondProduct.availableSizes.includes(size)
+      !secondProduct.availableSizes.includes(size) &&
+      firstProduct.availableSizes.includes(size)
     ) {
       return 1;
     }
     return 0;
   });
+}
+
+function orderByPrice(products, orderByPrice) {
+  products.sort((firstProduct, secondProduct) => {
+    return firstProduct.price - secondProduct.price;
+  });
+  if (orderByPrice === "Lowest to highest") {
+    products.reverse();
+  }
 }

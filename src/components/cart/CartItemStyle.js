@@ -38,6 +38,8 @@ export const TotalCost = styled.p`
   left: 20px;
 `;
 
-export const ProductDetail = styled.section``;
+export const ProductDetail = styled.section`
+  margin-left: 10px;
+`;
 
 export const Price = styled.p``;

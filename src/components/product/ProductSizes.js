@@ -17,9 +17,9 @@ const SizeButton = styled.button`
   text-align: center;
   font-weight: bold;
 `;
-export const ProductSizes = ({ products, addProductIntoCartHandler }) => {
+export const ProductSizes = ({ products, cartItemHandler }) => {
   const onSizeClickHnadler = size => {
-    addProductIntoCartHandler({
+    cartItemHandler({
       type: SORT_PRODUCT_BY_SIZES,
       payload: {
         products: products,
@@ -29,7 +29,7 @@ export const ProductSizes = ({ products, addProductIntoCartHandler }) => {
   };
   return (
     <div>
-      <SizeButton key={"XS"} onClick={() => addProductIntoCartHandler("XS")}>
+      <SizeButton key={"XS"} onClick={() => onSizeClickHnadler("XS")}>
         XS
       </SizeButton>
       <SizeButton key={"S"} onClick={() => onSizeClickHnadler("S")}>

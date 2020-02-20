@@ -4,7 +4,7 @@ import { CartItem } from "./CartItem";
 
 import { TableRow } from "./CartItemStyle";
 
-const CartModelContainer = styled.article`
+const CartModelContainer = styled.section`
   position: absolute;
   top: 20%;
   background-color: white;
@@ -14,6 +14,8 @@ const CartModelContainer = styled.article`
   padding: 20px;
   width: 800px;
   box-sizing: border-box;
+  background-color: black;
+  color: white;
 `;
 const commonStyleForTable = css`
   border-bottom: 2px solid black;
@@ -34,7 +36,7 @@ const TableStyling = styled.table`
   box-sizing: border-box;
 `;
 
-const CartItems = styled.section`
+const CartList = styled.section`
   box-sizing: border-box;
 `;
 const TableHeading = styled.tr`
@@ -62,7 +64,7 @@ const CartTitle = styled.h3`
   top: 10px;
 `;
 
-const ButtonBuyNow = styled.button`
+const Checkout = styled.button`
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -90,7 +92,7 @@ const CloseModal = styled.button`
   right: 0;
 `;
 
-export const CartModal = ({ cart, setshowModel, quantityChangeHandler }) => {
+export const CartModal = ({ cartItems, manageCartItemsHandler }) => {
   const handleBuyNow = (subTotal, total, vat) => {
     setshowModel(false);
     alert(`{ subtotal: ${subTotal}, total: ${total} vat: ${(vat * 20) / 100}}`);
@@ -99,46 +101,30 @@ export const CartModal = ({ cart, setshowModel, quantityChangeHandler }) => {
   return (
     <>
       <CartModelContainer>
-        <CartTitle>Your cart Items</CartTitle>
         <CloseModal onClick={() => setshowModel(false)}>X</CloseModal>
-
-        <CartItems>
+        <CartList>
           <TableStyling>
             <tbody>
-              <TableHeading>
-                <th>Product</th>
-                <th>Total Cost</th>
-              </TableHeading>
-              {cart.products &&
-                cart.products.map(function productsIntoCart(product, index) {
+              {cartItems &&
+                cartItems.map((product, index) => {
                   return (
                     <CartItem
                       product={product}
-                      key={`${index}${product}${product.title}`}
-                      quantityChangeHandler={quantityChangeHandler}
+                      index={index}
+                      key={`${index}${product.id}${product.title}`}
+                      manageCartItemsHandler={manageCartItemsHandler}
                     />
                   );
                 })}
-              <tr>
-                <SubTotal>
-                  <p>Subtotal $ {cart.subTotal}</p>
-                  <p>Vat @ 20% {cart.vat}</p>
-                </SubTotal>
-              </tr>
-              <TableRow>
-                <Total>Total Cost $ {cart.totalCostIncludingVat}</Total>
-              </TableRow>
             </tbody>
           </TableStyling>
-        </CartItems>
-        <ButtonBuyNow
-          onClick={() =>
-            handleBuyNow(cart.subTotal, cart.totalCostIncludingVat, cart.vat)
-          }
-          disabled={cart.products.length <= 0}
+        </CartList>
+        <Checkout
+          onClick={() => console.log("Needs to calculate subtotal here")}
+          disabled={cartItems.length <= 0}
         >
-          Buy Now >>
-        </ButtonBuyNow>
+          Checkout >>
+        </Checkout>
       </CartModelContainer>
     </>
   );

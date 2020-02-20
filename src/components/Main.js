@@ -12,12 +12,20 @@ export const Main = () => {
   };
   const [store, dispatch] = useReducer(reducer, initialStore);
   const [showCartModal, setShowModal] = useState(false);
-  console.log("Main ", store.cartItems.length);
+  console.log(showCartModal, "added items into cart");
   return (
     <>
       <Header toggleCartModal={() => setShowModal(!showCartModal)} />
-      <ProductList store={store} addProductIntoCartHandler={dispatch} />
-      {showCartModal && <CartModal cartItems={store.cartItems} />}
+      <ProductList
+        products={store.products}
+        addProductIntoCartHandler={dispatch}
+      />
+      {showCartModal && (
+        <CartModal
+          cartItems={store.cartItems}
+          manageCartItemsHandler={dispatch}
+        />
+      )}
     </>
   );
 };

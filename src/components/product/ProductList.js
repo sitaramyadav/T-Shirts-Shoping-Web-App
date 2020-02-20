@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Product } from "./Product";
 import { ProductSizes } from "./ProductSizes";
+import { OrderByPrice } from "./OrderByPrice";
+
 const MainContainer = styled.main`
   opacity: ${props => (props.showModel ? ".5" : "1")};
 `;
@@ -12,15 +14,24 @@ const ProductListCataloge = styled.ul`
   justify-content: space-around;
 `;
 
-export const ProductList = ({ store, addProductIntoCartHandler }) => {
+const ProductListHeader = styled.section``;
+
+export const ProductList = ({ products, addProductIntoCartHandler }) => {
+  //Todo: addProductIntoCartHandler can be renamed to cartProductHandler
   return (
     <MainContainer>
-      <ProductSizes
-        products={store.products}
-        addProductIntoCartHandler={addProductIntoCartHandler}
-      ></ProductSizes>
+      <ProductListHeader>
+        <ProductSizes
+          products={products}
+          cartItemHandler={addProductIntoCartHandler}
+        ></ProductSizes>
+        <OrderByPrice
+          products={products}
+          cartProductHandler={addProductIntoCartHandler}
+        ></OrderByPrice>
+      </ProductListHeader>
       <ProductListCataloge>
-        {store.products.map((product, index) => {
+        {products.map((product, index) => {
           return (
             <Product
               key={`${product.id}${index}`}
