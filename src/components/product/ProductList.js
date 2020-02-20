@@ -16,21 +16,21 @@ const ProductListCataloge = styled.ul`
 
 const ProductListHeader = styled.section``;
 
-export const ProductList = ({ products, addProductIntoCartHandler }) => {
+export const ProductList = ({ store, addProductIntoCartHandler }) => {
   return (
     <MainContainer>
       <ProductListHeader>
         <ProductSizes
-          products={products}
+          products={store.products}
           cartItemHandler={addProductIntoCartHandler}
         ></ProductSizes>
         <OrderByPrice
-          products={products}
+          products={store.products}
           cartProductHandler={addProductIntoCartHandler}
         ></OrderByPrice>
       </ProductListHeader>
       <ProductListCataloge>
-        {products.map((product, index) => {
+        {store.products.map((product, index) => {
           return (
             <Product
               key={`${index}`}

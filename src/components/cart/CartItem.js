@@ -1,6 +1,5 @@
 import React from "react";
-import CartThumImageUrl from "../../../images/products/101_2.jpg";
-import { UPDATE_CART, REMOVE_ITEM } from "../../Constants";
+import { UPDATE_CART, REMOVE_FROM_CART } from "../../Constants";
 const images = require.context("../../../images/products", true);
 
 import {
@@ -46,7 +45,7 @@ export const CartItem = ({ product, index, manageCartItemsHandler }) => {
               alt="Delete from cart"
               onClick={() => {
                 manageCartItemsHandler({
-                  type: REMOVE_ITEM,
+                  type: REMOVE_FROM_CART,
                   payload: {
                     id: product.id
                   }

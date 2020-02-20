@@ -92,7 +92,7 @@ const CloseModal = styled.button`
   right: 0;
 `;
 
-export const CartModal = ({ cartItems, manageCartItemsHandler }) => {
+export const CartModal = ({ store, manageCartItemsHandler }) => {
   const handleBuyNow = (subTotal, total, vat) => {
     setshowModel(false);
     alert(`{ subtotal: ${subTotal}, total: ${total} vat: ${(vat * 20) / 100}}`);
@@ -105,13 +105,13 @@ export const CartModal = ({ cartItems, manageCartItemsHandler }) => {
         <CartList>
           <TableStyling>
             <tbody>
-              {cartItems &&
-                cartItems.map((product, index) => {
+              {store.cartItems &&
+                store.cartItems.map((product, index) => {
                   return (
                     <CartItem
                       product={product}
                       index={index}
-                      key={`${index}${product.id}${product.title}`}
+                      key={`${index}`}
                       manageCartItemsHandler={manageCartItemsHandler}
                     />
                   );
@@ -121,7 +121,7 @@ export const CartModal = ({ cartItems, manageCartItemsHandler }) => {
         </CartList>
         <Checkout
           onClick={() => console.log("Needs to calculate subtotal here")}
-          disabled={cartItems.length <= 0}
+          disabled={store.cartItems.length <= 0}
         >
           Checkout >>
         </Checkout>

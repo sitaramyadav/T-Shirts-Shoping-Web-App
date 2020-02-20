@@ -1,0 +1,10 @@
+1. Add to cart behaviour
+    1. once user cliked on cart data should be added in the cart and removed from the productsList
+2. Show the cartIcon on top right corner.
+3. Once User clicks on the cartIcon modal should open with 
+    1. no of items in the cart should show 
+    2. list of item should be on the modal 
+    3. subtotal should be calucatated and shown.
+4. sized needs to be shown in the left side.
+    1. on click of size products should be filtered.
+        

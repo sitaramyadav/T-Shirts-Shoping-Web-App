@@ -45,7 +45,7 @@ export const Product = ({ product, addProductIntoCartHandler }) => {
   const formatedPrice = `${product.currencyFormat}${product.price}`;
   return (
     <CardContainer>
-      {product.isFreeShipping && <button>Free Shoping</button>}
+      {product.isFreeShipping && <button>Free Shipping</button>}
       <picture>
         <ProductImage src={img.default} alt={"Product Image"} />
         <figcaption>{product.title}</figcaption>

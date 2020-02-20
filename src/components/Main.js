@@ -16,15 +16,9 @@ export const Main = () => {
   return (
     <>
       <Header toggleCartModal={() => setShowModal(!showCartModal)} />
-      <ProductList
-        products={store.products}
-        addProductIntoCartHandler={dispatch}
-      />
+      <ProductList store={store} addProductIntoCartHandler={dispatch} />
       {showCartModal && (
-        <CartModal
-          cartItems={store.cartItems}
-          manageCartItemsHandler={dispatch}
-        />
+        <CartModal store={store} manageCartItemsHandler={dispatch} />
       )}
     </>
   );

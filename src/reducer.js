@@ -1,7 +1,7 @@
 import {
   ADD_TO_CART,
   UPDATE_CART,
-  REMOVE_ITEM,
+  REMOVE_FROM_CART,
   SORT_PRODUCT_BY_SIZES
 } from "./Constants";
 
@@ -13,10 +13,19 @@ export function reducer(state, action) {
         products: removeProduct(state.products, action.payload.id),
         cartItems: [
           ...state.cartItems,
-          addProductIntoCart(state.products, action.payload.id)
+          addProduct(state.products, action.payload.id)
         ]
       };
     }
+    case REMOVE_FROM_CART:
+      return {
+        ...state,
+        products: [
+          ...state.products,
+          addProduct(state.products, action.payload.id)
+        ],
+        cartItems: removeProduct(state.cartItems, action.payload.id)
+      };
 
     case SORT_PRODUCT_BY_SIZES: {
       let products = [...state.products];
@@ -35,31 +44,13 @@ export function reducer(state, action) {
         products
       };
     }
-    case REMOVE_ITEM:
-      const product = state.products.find(
-        product => action.payload.id === product.id
-      );
-      const cartItems = state.cartItems.filter(
-        product => product.id !== action.payload.id
-      );
 
-      return {
-        ...state,
-        products: [...state.products, product],
-        cartItems
-      };
     default:
       throw new Error();
   }
 }
 
-function computeSubTotal(products) {
-  return products.reduce((acc, currProduct) => {
-    return acc + Number(currProduct.price) * Number(currProduct.quantity);
-  }, 0);
-}
-
-function addProductIntoCart(products, productId) {
+function addProduct(products, productId) {
   return products.find(product => product.id === productId);
 }
 
