@@ -1,4 +1,9 @@
-import { ADD_TO_CART, UPDATE_CART, REMOVE_ITEM } from "./Constants";
+import {
+  ADD_TO_CART,
+  UPDATE_CART,
+  REMOVE_ITEM,
+  SORT_PRODUCT_BY_SIZES
+} from "./Constants";
 
 export function reducer(state, action) {
   switch (action.type) {
@@ -13,6 +18,17 @@ export function reducer(state, action) {
       };
     }
 
+    case SORT_PRODUCT_BY_SIZES: {
+      let products = [...state.products];
+      console.log(products, "befoer sort");
+      orderBySize(products, action.payload.size);
+      console.log("after sort", "befoer sort");
+      products.reverse();
+      return {
+        ...state,
+        products
+      };
+    }
     case UPDATE_CART: {
       const products = updateCartModalOnChange(state, action.payload);
       const { vat, subTotal, totalCostIncludingVat } = cartProductComputation(
@@ -111,4 +127,22 @@ function addProductIntoCart(products, productId) {
 
 function removeProduct(products, productId) {
   return products.filter(product => product.id !== productId);
+}
+
+function orderBySize(products, size) {
+  products.sort(function(firstProduct, secondProduct) {
+    if (
+      !firstProduct.availableSizes.includes(size) &&
+      secondProduct.availableSizes.includes(size)
+    ) {
+      return -1;
+    }
+    if (
+      !firstProduct.availableSizes.includes(size) &&
+      !secondProduct.availableSizes.includes(size)
+    ) {
+      return 1;
+    }
+    return 0;
+  });
 }

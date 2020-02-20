@@ -46,6 +46,7 @@ export const Product = ({ product, addProductIntoCartHandler }) => {
       <picture>
         <ProductImage src={img.default} alt={"Product Image"} />
         <figcaption>{product.title}</figcaption>
+        <p>Available Sizes {product.availableSizes.join(" ")}</p>
       </picture>
       <CartFooter>
         <Price>Price: {formatedPrice}</Price>
