@@ -2,6 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { SORT_PRODUCT_BY_SIZES } from "../../Constants";
 
+const Sizes = styled.section`
+  display: flex;
+  width: 230px;
+  flex-wrap: wrap;
+  font-size: 16px;
+`;
 const SizeButton = styled.button`
   width: 50px;
   height: 50px;
@@ -16,6 +22,12 @@ const SizeButton = styled.button`
   overflow: none;
   text-align: center;
   font-weight: bold;
+  margin: 3px;
+`;
+const ProductCount = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 230px;
 `;
 export const ProductSizes = ({ products, cartItemHandler }) => {
   const onSizeClickHnadler = size => {
@@ -28,7 +40,11 @@ export const ProductSizes = ({ products, cartItemHandler }) => {
     });
   };
   return (
-    <div>
+    <Sizes>
+      <ProductCount>
+        <p>Sizes:</p>
+        <p>{`${products.length} Product(s) found`}</p>
+      </ProductCount>{" "}
       <SizeButton key={"XS"} onClick={() => onSizeClickHnadler("XS")}>
         XS
       </SizeButton>
@@ -50,6 +66,6 @@ export const ProductSizes = ({ products, cartItemHandler }) => {
       <SizeButton key={"XLL"} onClick={() => onSizeClickHnadler("XXL")}>
         XXL
       </SizeButton>
-    </div>
+    </Sizes>
   );
 };

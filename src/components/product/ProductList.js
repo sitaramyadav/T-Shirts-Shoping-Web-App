@@ -13,22 +13,33 @@ const ProductListCataloge = styled.ul`
   flex-wrap: wrap;
   justify-content: space-around;
 `;
+const ProductCountAndSizes = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 230px;
+`;
 
-const ProductListHeader = styled.section``;
+const ProductListHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+`;
 
 export const ProductList = ({ store, addProductIntoCartHandler }) => {
   return (
     <MainContainer>
       <ProductListHeader>
-        <ProductSizes
-          products={store.products}
-          cartItemHandler={addProductIntoCartHandler}
-        ></ProductSizes>
+        <ProductCountAndSizes>
+          <ProductSizes
+            products={store.products}
+            cartItemHandler={addProductIntoCartHandler}
+          ></ProductSizes>
+        </ProductCountAndSizes>
         <OrderByPrice
           products={store.products}
           cartProductHandler={addProductIntoCartHandler}
         ></OrderByPrice>
       </ProductListHeader>
+
       <ProductListCataloge>
         {store.products.map((product, index) => {
           return (
