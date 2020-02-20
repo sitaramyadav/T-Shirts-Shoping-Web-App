@@ -16,24 +16,21 @@ import {
 } from "./CartItemStyle";
 
 export const CartItem = ({ product, index, manageCartItemsHandler }) => {
-  console.log("product from caritemr@@@@@@@@@@@@@@", product);
   const imageName = product.src_2.split("/")[2];
   let img = images("./" + imageName);
   console.log(img, "image");
   return (
-    <TableRow key={`${index}${Math.random(0, 9)}}`}>
+    <TableRow key={`${index}}`}>
       <TableData>
         <ProductInfo>
           <picture>
             <img src={img.default} alt="Product Image" />
           </picture>
           <ProductDetail>
-            <ProductTitle key={`${index}${product.title}${Math.random(0, 9)}`}>
+            <ProductTitle key={`${index}${product.title}`}>
               {product.title}
             </ProductTitle>
-            <Price key={`${index}${product.price}${Math.random(0, 9)}`}>
-              $ {product.price}
-            </Price>
+            <Price key={`${index}${product.price}`}>$ {product.price}</Price>
             {/* as per desgin
              There is no option to select specific size while adding the product into cart.
              so I am alway rendering the first available size into cart. */}
@@ -48,14 +45,16 @@ export const CartItem = ({ product, index, manageCartItemsHandler }) => {
               src="x"
               alt="Delete from cart"
               onClick={() => {
-                quantityChangeHandler({
+                manageCartItemsHandler({
                   type: REMOVE_ITEM,
                   payload: {
                     id: product.id
                   }
                 });
               }}
-            />
+            >
+              X
+            </TrashIcon>
           </picture>
         </PriceSection>
       </TableData>

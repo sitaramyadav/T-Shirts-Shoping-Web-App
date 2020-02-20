@@ -17,7 +17,6 @@ const ProductListCataloge = styled.ul`
 const ProductListHeader = styled.section``;
 
 export const ProductList = ({ products, addProductIntoCartHandler }) => {
-  //Todo: addProductIntoCartHandler can be renamed to cartProductHandler
   return (
     <MainContainer>
       <ProductListHeader>
@@ -34,7 +33,7 @@ export const ProductList = ({ products, addProductIntoCartHandler }) => {
         {products.map((product, index) => {
           return (
             <Product
-              key={`${product.id}${index}`}
+              key={`${index}`}
               product={product}
               addProductIntoCartHandler={addProductIntoCartHandler}
             />

@@ -36,62 +36,21 @@ export function reducer(state, action) {
       };
     }
     case REMOVE_ITEM:
-      const length = state.cart.products.length;
-      const products_ = length === 1 ? [] : [...state.cart];
-      const indexToBeRemoved =
-        length > 1 && products_.findIndex(action.payload);
-      products_.splice(indexToBeRemoved, indexToBeRemoved + 1);
-      const { vat_, subTotal_, totalCostIncludingVat } = cartProductComputation(
-        products_
+      const product = state.products.find(
+        product => action.payload.id === product.id
+      );
+      const cartItems = state.cartItems.filter(
+        product => product.id !== action.payload.id
       );
 
       return {
         ...state,
-        cart: {
-          ...state.cart,
-          products: products_,
-          vat: vat_,
-          subTotal: subTotal_,
-          totalCostIncludingVat
-        }
+        products: [...state.products, product],
+        cartItems
       };
     default:
       throw new Error();
   }
-}
-
-function cartProductComputation(products) {
-  if (products.length === 0) {
-    return {
-      subTotal: 0,
-      vat: 0,
-      totalCostIncludingVat: 0
-    };
-  } else {
-    const subTotal = computeSubTotal(products);
-    const vat = (subTotal * (20 / 100)).toFixed(2);
-    const totalCostIncludingVat = subTotal + vat;
-    return { subTotal, vat, totalCostIncludingVat };
-  }
-}
-function updateCartModalOnChange(state, payload) {
-  return state.cart.products.map(product => {
-    if (product.productTitle === payload.productTitle) {
-      return {
-        quantity: payload.quantity,
-        productTitle: payload.productTitle,
-        price: payload.price,
-        totalCost: (Number(payload.price) * Number(payload.quantity)).toFixed(2)
-      };
-    } else {
-      return {
-        quantity: product.quantity,
-        productTitle: product.productTitle,
-        price: product.price,
-        totalCost: (Number(payload.price) * Number(product.quantity)).toFixed(2)
-      };
-    }
-  });
 }
 
 function computeSubTotal(products) {

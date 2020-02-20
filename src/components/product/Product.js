@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { PrimaryButton } from "../common/PraimaryButton";
 import { ADD_TO_CART } from "../../Constants";
-const images = require.context("../../../images/products", true);
+const images = require.context("../../../images", true);
 
 const CardContainer = styled.li`
   list-style-type: none;
@@ -37,8 +37,11 @@ const Price = styled.p`
   font-weight: bold;
 `;
 export const Product = ({ product, addProductIntoCartHandler }) => {
-  const imageName = product.src_1.split("/")[2];
-  let img = images("./" + imageName);
+  let imageName;
+  if (product && product.src_1) {
+    imageName = product.src_1;
+  }
+  let img = images("." + imageName);
   const formatedPrice = `${product.currencyFormat}${product.price}`;
   return (
     <CardContainer>
