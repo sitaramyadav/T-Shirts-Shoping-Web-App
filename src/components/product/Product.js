@@ -4,18 +4,25 @@ import { PrimaryButton } from "../common/PraimaryButton";
 import { ADD_TO_CART } from "../../Constants";
 const images = require.context("../../../images", true);
 
-const CardContainer = styled.li`
+const ProductContainer = styled.li`
   list-style-type: none;
   width: 400px;
 `;
 
-const CartFooter = styled.figcaption`
+const ProductFooter = styled.footer`
   display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+  justify-content: center;
+  margin: 10px 0 0 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const ButtonAddToCart = styled(PrimaryButton)`
-  // cursor: ${props => (props.showModel ? "no-drop;" : "pointer")};
+  width: 205px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 `;
 
 const ProductImage = styled.img`
@@ -30,9 +37,14 @@ const FreeShipping = styled.button`
   position: relative;
   left: 60%;
 `;
-
+const FigCaption = styled.figcaption`
+  text-align: center;
+  margin: 5px;
+`;
 const Price = styled.p`
   font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
 `;
 export const Product = ({ product, addProductIntoCartHandler }) => {
   let imageName;
@@ -42,15 +54,17 @@ export const Product = ({ product, addProductIntoCartHandler }) => {
   let img = images("." + imageName);
   const formatedPrice = `${product.currencyFormat}${product.price}`;
   return (
-    <CardContainer>
+    <ProductContainer>
       {product.isFreeShipping && <FreeShipping>Free Shipping</FreeShipping>}
       <picture>
         <ProductImage src={img.default} alt={"Product Image"} />
-        <figcaption>{product.title}</figcaption>
-        <p>Available Sizes {product.availableSizes.join(" ")}</p>
+        <FigCaption>{product.title}</FigCaption>
+        <FigCaption>
+          Available Sizes {product.availableSizes.join(" ")}
+        </FigCaption>
       </picture>
-      <CartFooter>
-        <Price>Price: {formatedPrice}</Price>
+      <ProductFooter>
+        <Price>{formatedPrice}</Price>
         <ButtonAddToCart
           onClick={() =>
             addProductIntoCartHandler({
@@ -63,7 +77,7 @@ export const Product = ({ product, addProductIntoCartHandler }) => {
         >
           <p>ADD TO CART</p>
         </ButtonAddToCart>
-      </CartFooter>
-    </CardContainer>
+      </ProductFooter>
+    </ProductContainer>
   );
 };

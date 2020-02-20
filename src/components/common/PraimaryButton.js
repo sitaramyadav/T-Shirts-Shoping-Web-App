@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export const PrimaryButton = styled.button`
-  background-color: red;
+  background-color: black;
   display: flex;
   color: white;
   padding: 0px 10px 0 10px;
