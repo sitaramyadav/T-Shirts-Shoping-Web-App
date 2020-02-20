@@ -6,7 +6,7 @@ const images = require.context("../../../images", true);
 
 const CardContainer = styled.li`
   list-style-type: none;
-  width: 430px;
+  width: 400px;
 `;
 
 const CartFooter = styled.figcaption`
@@ -18,19 +18,17 @@ const ButtonAddToCart = styled(PrimaryButton)`
   // cursor: ${props => (props.showModel ? "no-drop;" : "pointer")};
 `;
 
-const IconAddToCart = styled.img`
-  margin: 17px 10px 0 0;
-`;
-
 const ProductImage = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 `;
-
-const ProductTitle = styled.h3`
-  margin: 20px 0 2px 0px;
+const FreeShipping = styled.button`
+  background-color: black;
+  color: white;
+  position: relative;
+  left: 60%;
 `;
 
 const Price = styled.p`
@@ -45,7 +43,7 @@ export const Product = ({ product, addProductIntoCartHandler }) => {
   const formatedPrice = `${product.currencyFormat}${product.price}`;
   return (
     <CardContainer>
-      {product.isFreeShipping && <button>Free Shipping</button>}
+      {product.isFreeShipping && <FreeShipping>Free Shipping</FreeShipping>}
       <picture>
         <ProductImage src={img.default} alt={"Product Image"} />
         <figcaption>{product.title}</figcaption>
