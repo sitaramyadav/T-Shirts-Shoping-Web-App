@@ -15,7 +15,10 @@ export const Main = () => {
   console.log(showCartModal, "added items into cart");
   return (
     <>
-      <Header toggleCartModal={() => setShowModal(!showCartModal)} />
+      <Header
+        toggleCartModal={() => setShowModal(!showCartModal)}
+        itemsCountsInTheCart={store.cartItems.length}
+      />
       <ProductList store={store} addProductIntoCartHandler={dispatch} />
       {showCartModal && (
         <CartModal
