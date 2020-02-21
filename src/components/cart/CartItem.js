@@ -7,7 +7,6 @@ import {
   TableData,
   ProductInfo,
   ProductDetail,
-  ProductTitle,
   PriceSection,
   Icon
 } from "./CartItemStyle";
@@ -24,19 +23,19 @@ export const CartItem = ({ product, index, manageCartItemsHandler }) => {
             <img src={img.default} alt="Product Image" />
           </picture>
           <ProductDetail>
-            <ProductTitle key={`${index}${product.title}`}>
-              {product.title}
-            </ProductTitle>
+            <p key={`${index}${product.title}`}>{product.title}</p>
             {/* 
              There is no design to select specific size while adding the product into cart.
              so I am alway rendering the first available size into cart. */}
             <p>
+              Size{" "}
               {product && product.availableSizes && product.availableSizes[0]}
             </p>
+            <p>Quantity 1</p>
           </ProductDetail>
         </ProductInfo>
         <PriceSection>
-          <Icon
+          <p
             onClick={() => {
               manageCartItemsHandler({
                 type: REMOVE_FROM_CART,
@@ -47,9 +46,9 @@ export const CartItem = ({ product, index, manageCartItemsHandler }) => {
             }}
           >
             X
-          </Icon>
-          <Icon key={`${index}${product.price}`}>$ {product.price}</Icon>
-          <Icon>+</Icon>
+          </p>
+          <p key={`${index}${product.price}`}>$ {product.price}</p>
+          <p>+</p>
         </PriceSection>
       </TableData>
     </TableRow>

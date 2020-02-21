@@ -26,13 +26,6 @@ export const PriceSection = styled.section`
   flex-direction: column;
 `;
 
-export const TrashIcon = styled.p`
-  position: relative;
-  left: 0px;
-  top: 10px;
-  cursor: pointer;
-`;
-
 export const TotalCost = styled.p`
   position: relative;
   left: 20px;
@@ -42,6 +35,4 @@ export const ProductDetail = styled.section`
   margin-left: 10px;
 `;
 
-export const Icon = styled.i`
-  margin: 5px;
-`;
+export const Icon = styled.p``;
