@@ -92,7 +92,11 @@ const CloseModal = styled.button`
   right: 0;
 `;
 
-export const CartModal = ({ store, manageCartItemsHandler }) => {
+export const CartModal = ({
+  store,
+  manageCartItemsHandler,
+  toggleCartModal
+}) => {
   const handleBuyNow = (subTotal, total, vat) => {
     setshowModel(false);
     alert(`{ subtotal: ${subTotal}, total: ${total} vat: ${(vat * 20) / 100}}`);
@@ -101,7 +105,7 @@ export const CartModal = ({ store, manageCartItemsHandler }) => {
   return (
     <>
       <CartModelContainer>
-        <CloseModal onClick={() => setshowModel(false)}>X</CloseModal>
+        <CloseModal onClick={() => toggleCartModal()}>X</CloseModal>
         <CartList>
           <TableStyling>
             <tbody>

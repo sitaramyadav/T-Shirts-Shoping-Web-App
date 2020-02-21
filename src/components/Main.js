@@ -18,7 +18,11 @@ export const Main = () => {
       <Header toggleCartModal={() => setShowModal(!showCartModal)} />
       <ProductList store={store} addProductIntoCartHandler={dispatch} />
       {showCartModal && (
-        <CartModal store={store} manageCartItemsHandler={dispatch} />
+        <CartModal
+          store={store}
+          manageCartItemsHandler={dispatch}
+          toggleCartModal={() => setShowModal(!showCartModal)}
+        />
       )}
     </>
   );
