@@ -17,15 +17,16 @@ export function reducer(state, action) {
         ]
       };
     }
-    case REMOVE_FROM_CART:
+    case REMOVE_FROM_CART: {
       return {
         ...state,
         products: [
           ...state.products,
-          addProduct(state.products, action.payload.id)
+          addProduct(state.cartItems, action.payload.id)
         ],
         cartItems: removeProduct(state.cartItems, action.payload.id)
       };
+    }
 
     case SORT_PRODUCT_BY_SIZES: {
       let products = [...state.products];
