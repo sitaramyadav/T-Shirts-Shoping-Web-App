@@ -2,84 +2,19 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { CartItem } from "./CartItem";
 
-import { TableRow } from "./CartItemStyle";
-
 const CartModelContainer = styled.section`
   position: absolute;
-  top: 20%;
+  top: 0%;
   background-color: white;
+
   display: flex;
-  left: 29%;
+  left: 52%;
   box-shadow: 10px 10px 5px #e1d9d9;
   padding: 20px;
   width: 800px;
-  box-sizing: border-box;
   background-color: black;
   color: white;
 `;
-const commonStyleForTable = css`
-  border-bottom: 2px solid black;
-  border-collapse: collapse;
-  width: 100%;
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0 10px;
-`;
-const TableStyling = styled.table`
-  ${commonStyleForTable}
-  border-top: 2px solid black;
-  border-bottom: none;
-
-  width: 700px;
-  margin: 60px 0 30px 0;
-  box-sizing: border-box;
-`;
-
-const CartList = styled.section`
-  box-sizing: border-box;
-`;
-const TableHeading = styled.tr`
-  ${commonStyleForTable}
-`;
-
-const SubTotal = styled.td`
-  ${commonStyleForTable}
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: 700px;
-`;
-
-const Total = styled.td`
-  display: flex;
-  flex-direction: flex-end;
-  justify-content: flex-end;
-  width: 700px;
-  padding: 10px 0 10px;
-`;
-const CartTitle = styled.h3`
-  position: absolute;
-  top: 10px;
-`;
-
-const Checkout = styled.button`
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  color: white;
-  background-color: red;
-  font-size: 16px;
-  cursor: pointer;
-  ${props =>
-    props.disabled === true &&
-    css`
-      cursor: no-drop;
-      opacity: 0.5;
-    `}
-`;
-
 const CloseModal = styled.button`
   background: white;
   height: 50px;
@@ -88,8 +23,47 @@ const CloseModal = styled.button`
   border: none;
   cursor: pointer;
   position: absolute;
-  top: 20px;
-  right: 0;
+  top: 0px;
+  right: 800px;
+  background-color: black;
+  color: white;
+  text-align: center;
+`;
+const CartList = styled.section`
+  box-sizing: border-box;
+`;
+const commonStyleForTable = css`
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0 10px;
+`;
+const TableStyling = styled.table`
+  ${commonStyleForTable}
+  border-bottom: none;
+
+  width: 700px;
+  margin: 60px 0 30px 0;
+  box-sizing: border-box;
+`;
+
+const Checkout = styled.button`
+  position: absolute;
+  bottom: 30px;
+  right: 50%;
+  left: 50%;
+  color: white;
+  background-color: black;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  ${props =>
+    props.disabled === true &&
+    css`
+      cursor: no-drop;
+      opacity: 0.5;
+    `}
 `;
 
 export const CartModal = ({
@@ -97,9 +71,10 @@ export const CartModal = ({
   manageCartItemsHandler,
   toggleCartModal
 }) => {
-  const handleBuyNow = (subTotal, total, vat) => {
-    setshowModel(false);
-    alert(`{ subtotal: ${subTotal}, total: ${total} vat: ${(vat * 20) / 100}}`);
+  const handleBuyNow = count => {
+    alert(`You are buying ${count} product`);
+    toggleCartModal(); // This is not something which is been asked from vidual desgin.
+    // I am just adding for smooth jurney of this app user.
   };
 
   return (
@@ -124,10 +99,10 @@ export const CartModal = ({
           </TableStyling>
         </CartList>
         <Checkout
-          onClick={() => console.log("Needs to calculate subtotal here")}
+          onClick={() => handleBuyNow(store.cartItems.length)}
           disabled={store.cartItems.length <= 0}
         >
-          Checkout >>
+          CHECKOUT
         </Checkout>
       </CartModelContainer>
     </>

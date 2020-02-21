@@ -21,9 +21,9 @@ export const ProductInfo = styled.section`
   align-items: center;
 `;
 
-export const TotalCostContainer = styled.section`
+export const PriceSection = styled.section`
   display: flex;
-  width: 90px;
+  flex-direction: column;
 `;
 
 export const TrashIcon = styled.p`
@@ -42,4 +42,6 @@ export const ProductDetail = styled.section`
   margin-left: 10px;
 `;
 
-export const Price = styled.p``;
+export const Icon = styled.i`
+  margin: 5px;
+`;

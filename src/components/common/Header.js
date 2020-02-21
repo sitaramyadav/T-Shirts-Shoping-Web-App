@@ -6,15 +6,20 @@ import cartIcon from "../../../images/icons/cart.png";
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: flex-end;
-  align-items: center;
   margin: 10px 50px;
   width: 100;
-  height: 70px;
 `;
 
 const CartIconContainer = styled.picture`
-  width: 4%;
+  width: 60px;
   background-color: black;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const CartIcon = styled.img`
+  cursor: pointer;
 `;
 const CartCounterStyle = styled.div`
   position: relative;
@@ -28,7 +33,7 @@ const CartCounterStyle = styled.div`
   color: black;
   font-weight: bold;
   position: relative;
-  top: 10px;
+  top: 34px;
   left: 57px;
 `;
 const CartCounter = styled.p`
@@ -38,12 +43,6 @@ const CartCounter = styled.p`
   bottom: 15px;
   left: 5px;
   font-weight: bold;
-`;
-const CartIcon = styled.img`
-  height: 40px;
-  cursor: pointer;
-  position: relative;
-  left: 10px;
 `;
 
 export const Header = ({ toggleCartModal, itemsCountsInTheCart }) => {
@@ -57,7 +56,7 @@ export const Header = ({ toggleCartModal, itemsCountsInTheCart }) => {
       <CartIconContainer>
         <CartIcon
           key={"Header"}
-          onClick={() => toggleCartModal()}
+          onClick={() => toggleCartModal && toggleCartModal()}
           src={cartIcon}
           alt={"cart logo"}
         />

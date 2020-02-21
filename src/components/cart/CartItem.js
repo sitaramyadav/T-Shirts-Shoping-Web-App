@@ -8,10 +8,8 @@ import {
   ProductInfo,
   ProductDetail,
   ProductTitle,
-  Price,
-  TotalCostContainer as PriceSection,
-  TrashIcon,
-  TotalCost
+  PriceSection,
+  Icon
 } from "./CartItemStyle";
 
 export const CartItem = ({ product, index, manageCartItemsHandler }) => {
@@ -29,9 +27,8 @@ export const CartItem = ({ product, index, manageCartItemsHandler }) => {
             <ProductTitle key={`${index}${product.title}`}>
               {product.title}
             </ProductTitle>
-            <Price key={`${index}${product.price}`}>$ {product.price}</Price>
-            {/* as per desgin
-             There is no option to select specific size while adding the product into cart.
+            {/* 
+             There is no design to select specific size while adding the product into cart.
              so I am alway rendering the first available size into cart. */}
             <p>
               {product && product.availableSizes && product.availableSizes[0]}
@@ -39,22 +36,20 @@ export const CartItem = ({ product, index, manageCartItemsHandler }) => {
           </ProductDetail>
         </ProductInfo>
         <PriceSection>
-          <picture>
-            <TrashIcon
-              src="x"
-              alt="Delete from cart"
-              onClick={() => {
-                manageCartItemsHandler({
-                  type: REMOVE_FROM_CART,
-                  payload: {
-                    id: product.id
-                  }
-                });
-              }}
-            >
-              X
-            </TrashIcon>
-          </picture>
+          <Icon
+            onClick={() => {
+              manageCartItemsHandler({
+                type: REMOVE_FROM_CART,
+                payload: {
+                  id: product.id
+                }
+              });
+            }}
+          >
+            X
+          </Icon>
+          <Icon key={`${index}${product.price}`}>$ {product.price}</Icon>
+          <Icon>+</Icon>
         </PriceSection>
       </TableData>
     </TableRow>
