@@ -1,6 +1,6 @@
 import {
   ADD_TO_CART,
-  UPDATE_CART,
+  ORDER_PRICES,
   REMOVE_FROM_CART,
   SORT_PRODUCT_BY_SIZES
 } from "./Constants";
@@ -44,7 +44,7 @@ export function reducer(state, action) {
         products
       };
     }
-    case UPDATE_CART: {
+    case ORDER_PRICES: {
       const products = [...state.products];
       orderByPrice(products, action.payload.orderBy);
       products.reverse();

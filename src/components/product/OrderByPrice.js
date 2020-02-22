@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { UPDATE_CART } from "../../Constants";
+import { ORDER_PRICES } from "../../Constants";
 import styled from "styled-components";
 
-const OrderByPriceContainer = styled.div`
+const OrderByPriceStyle = styled.div`
   display: flex;
   padding: 0 5px 0 5px;
 `;
@@ -12,11 +12,10 @@ const Select = styled.select`
 `;
 export const OrderByPrice = ({ products, cartProductHandler }) => {
   const [orderBy, setOrderBy] = useState("");
-  console.log(orderBy, "orderBy====");
   const orderByPriceHandler = value => {
     setOrderBy(value);
     cartProductHandler({
-      type: UPDATE_CART,
+      type: ORDER_PRICES,
       payload: {
         orderBy: value,
         products: products
@@ -24,7 +23,7 @@ export const OrderByPrice = ({ products, cartProductHandler }) => {
     });
   };
   return (
-    <OrderByPriceContainer>
+    <OrderByPriceStyle>
       <p>
         Order By
         <Select
@@ -36,6 +35,6 @@ export const OrderByPrice = ({ products, cartProductHandler }) => {
           <option value="Higest to lowest">Higest to lowest</option>
         </Select>
       </p>
-    </OrderByPriceContainer>
+    </OrderByPriceStyle>
   );
 };

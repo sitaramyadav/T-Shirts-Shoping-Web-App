@@ -6,7 +6,7 @@ import { CartIconCounter } from "./CartIconCounter";
 
 const CartIconContainer = styled.picture`
   width: 60px;
-  background-color: black;
+  background-color: #1b1920;
   height: 60px;
   display: flex;
   justify-content: center;

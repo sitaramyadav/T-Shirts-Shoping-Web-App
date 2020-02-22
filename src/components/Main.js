@@ -7,12 +7,11 @@ import { reducer } from "../reducer";
 
 export const Main = () => {
   const initialStore = {
-    products: productsdata,
+    products: [...productsdata],
     cartItems: []
   };
   const [store, dispatch] = useReducer(reducer, initialStore);
   const [showCartModal, setShowModal] = useState(false);
-  console.log(showCartModal, "added items into cart");
   return (
     <>
       <Header

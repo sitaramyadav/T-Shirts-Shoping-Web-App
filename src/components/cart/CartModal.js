@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { CartItem } from "./CartItem";
 import { CartIcon } from "../common/CartIcon";
@@ -6,26 +6,19 @@ import { CartIcon } from "../common/CartIcon";
 const CartModelContainer = styled.section`
   position: absolute;
   top: 0%;
-  background-color: white;
-
-  display: flex;
   left: 52%;
-  padding: 20px;
-  width: 46%;
-  background-color: black;
-  color: white;
+  display: flex;
   flex-direction: column;
+  padding: 16px;
+  width: 46%;
+  background-color: #1b1920;
+  color: white;
 `;
 const CartHeader = styled.header`
   display: flex;
 `;
-const CartIconStyle = styled.div`
-  display: flex;
-  position: relative;
-  left: 50%;
-`;
 const CloseModal = styled.button`
-  background: white;
+  background-color: #1b1920;
   height: 50px;
   width: 50px;
   font-size: 24px;
@@ -33,13 +26,18 @@ const CloseModal = styled.button`
   cursor: pointer;
   position: absolute;
   top: 0px;
-  right: 800px;
-  background-color: black;
+  right: 643px;
   color: white;
-  text-align: center;
+`;
+const CartIconStyle = styled.div`
+  display: flex;
+  position: absolute;
+  left: 50%;
 `;
 const CartList = styled.section`
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
 `;
 const commonStyleForTable = css`
   width: 100%;
@@ -51,22 +49,36 @@ const commonStyleForTable = css`
 const TableStyling = styled.table`
   ${commonStyleForTable}
   border-bottom: none;
-
-  // width: 700px;
   margin: 60px 0 30px 0;
   box-sizing: border-box;
 `;
 
-const Checkout = styled.button`
-  position: absolute;
+const SubTotal = styled.div`
+  color: white;
+  font-size: 16px;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
   bottom: 30px;
-  right: 50%;
-  left: 50%;
+  margin: 20px 0 20px 0;
+`;
+
+const Checkout = styled.footer`
+  position: absolute;
+  right: 0;
+  bottom: 0;
   color: white;
   background-color: black;
   font-size: 16px;
   cursor: pointer;
   border: none;
+  width: 100%;
+  height: 43px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 20px 0;
   ${props =>
     props.disabled === true &&
     css`
@@ -75,18 +87,15 @@ const Checkout = styled.button`
     `}
 `;
 
-const SubTotal = styled.button``;
-
 export const CartModal = ({
   store,
   manageCartItemsHandler,
   toggleCartModal
 }) => {
-  console.log(store.cartSubTotal, "ah ah a");
-  const handleBuyNow = count => {
+  const handleCheckout = count => {
     alert(`You are buying ${count} product`);
-    toggleCartModal(); // This is not something which is been asked from vidual desgin.
-    // I am just adding for smooth jurney of this app user.
+    toggleCartModal(); // This is not something which is been asked from visual design.
+    // I am just adding for smooth jurney from user presepective
   };
 
   return (
@@ -97,7 +106,7 @@ export const CartModal = ({
         </CartHeader>
         <CartIconStyle>
           <CartIcon
-            toggleCartModal={undefined}
+            toggleCartModal={""}
             itemsCountsInTheCart={store.cartItems.length}
           />{" "}
           <p>Cart</p>
@@ -119,9 +128,12 @@ export const CartModal = ({
             </tbody>
           </TableStyling>
         </CartList>
-        <SubTotal>SubTotal: {store.cartSubTotal} </SubTotal>
+        <SubTotal>
+          <p>SUBTOTAL </p>
+          <p>{parseInt(store.cartSubTotal).toFixed(2)}</p>{" "}
+        </SubTotal>
         <Checkout
-          onClick={() => handleBuyNow(store.cartItems.length)}
+          onClick={() => handleCheckout(store.cartItems.length)}
           disabled={store.cartItems.length <= 0}
         >
           CHECKOUT

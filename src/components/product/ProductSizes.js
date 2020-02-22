@@ -23,6 +23,10 @@ const SizeButton = styled.button`
   text-align: center;
   font-weight: bold;
   margin: 3px;
+  &:focus {
+    background-color: black;
+    color: white;
+  }
 `;
 const ProductCount = styled.div`
   display: flex;

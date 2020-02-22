@@ -6,7 +6,7 @@ const images = require.context("../../../images", true);
 
 const ProductContainer = styled.li`
   list-style-type: none;
-  width: 400px;
+  width: 300px;
 `;
 
 const ProductFooter = styled.footer`
@@ -23,6 +23,9 @@ const ButtonAddToCart = styled(PrimaryButton)`
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
+  &:hover {
+    background-color: #c19e04;
+  }
 `;
 
 const ProductImage = styled.img`
