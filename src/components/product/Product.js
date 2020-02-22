@@ -70,7 +70,8 @@ export const Product = ({ product, addProductIntoCartHandler }) => {
             addProductIntoCartHandler({
               type: ADD_TO_CART,
               payload: {
-                id: product.id
+                id: product.id,
+                price: product.price
               }
             })
           }

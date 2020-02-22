@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const TableRow = styled.tr`
   width: 100%;
   position: relative;
-  border-bottom: 2px solid black;
 `;
 export const TableData = styled.td`
   box-sizing: border-box;
@@ -13,7 +12,6 @@ export const TableData = styled.td`
   align-items: center;
   width: 700px;
 `;
-export const ProductTitle = styled.p``;
 
 export const ProductInfo = styled.section`
   display: flex;

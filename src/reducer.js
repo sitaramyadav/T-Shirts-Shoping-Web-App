@@ -8,23 +8,31 @@ import {
 export function reducer(state, action) {
   switch (action.type) {
     case ADD_TO_CART: {
+      const cartSubTotal = computeSubTotal(
+        state.cartItems,
+        action.payload.price
+      );
       return {
         ...state,
         products: removeProduct(state.products, action.payload.id),
         cartItems: [
           ...state.cartItems,
           addProduct(state.products, action.payload.id)
-        ]
+        ],
+        cartSubTotal: cartSubTotal
       };
     }
     case REMOVE_FROM_CART: {
+      const cartSubTotal = state.cartSubTotal - action.payload.price;
+
       return {
         ...state,
         products: [
           ...state.products,
           addProduct(state.cartItems, action.payload.id)
         ],
-        cartItems: removeProduct(state.cartItems, action.payload.id)
+        cartItems: removeProduct(state.cartItems, action.payload.id),
+        cartSubTotal
       };
     }
 
@@ -51,6 +59,15 @@ export function reducer(state, action) {
   }
 }
 
+function computeSubTotal(products, initial) {
+  if (products.length === 0) {
+    return initial;
+  }
+
+  return products.reduce((acc, currProduct) => {
+    return acc + parseInt(currProduct.price);
+  }, initial);
+}
 function addProduct(products, productId) {
   return products.find(product => product.id === productId);
 }

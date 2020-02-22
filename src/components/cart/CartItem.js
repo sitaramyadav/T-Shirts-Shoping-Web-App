@@ -40,7 +40,8 @@ export const CartItem = ({ product, index, manageCartItemsHandler }) => {
               manageCartItemsHandler({
                 type: REMOVE_FROM_CART,
                 payload: {
-                  id: product.id
+                  id: product.id,
+                  pirce: product.price
                 }
               });
             }}

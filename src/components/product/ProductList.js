@@ -4,9 +4,7 @@ import { Product } from "./Product";
 import { ProductSizes } from "./ProductSizes";
 import { OrderByPrice } from "./OrderByPrice";
 
-const MainContainer = styled.main`
-  opacity: ${props => (props.showModel ? ".5" : "1")};
-`;
+const MainContainer = styled.main``;
 
 const ProductListCataloge = styled.ul`
   display: flex;

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { CartItem } from "./CartItem";
+import { CartIcon } from "../common/CartIcon";
 
 const CartModelContainer = styled.section`
   position: absolute;
@@ -9,11 +10,19 @@ const CartModelContainer = styled.section`
 
   display: flex;
   left: 52%;
-  box-shadow: 10px 10px 5px #e1d9d9;
   padding: 20px;
-  width: 800px;
+  width: 46%;
   background-color: black;
   color: white;
+  flex-direction: column;
+`;
+const CartHeader = styled.header`
+  display: flex;
+`;
+const CartIconStyle = styled.div`
+  display: flex;
+  position: relative;
+  left: 50%;
 `;
 const CloseModal = styled.button`
   background: white;
@@ -43,7 +52,7 @@ const TableStyling = styled.table`
   ${commonStyleForTable}
   border-bottom: none;
 
-  width: 700px;
+  // width: 700px;
   margin: 60px 0 30px 0;
   box-sizing: border-box;
 `;
@@ -66,11 +75,14 @@ const Checkout = styled.button`
     `}
 `;
 
+const SubTotal = styled.button``;
+
 export const CartModal = ({
   store,
   manageCartItemsHandler,
   toggleCartModal
 }) => {
+  console.log(store.cartSubTotal, "ah ah a");
   const handleBuyNow = count => {
     alert(`You are buying ${count} product`);
     toggleCartModal(); // This is not something which is been asked from vidual desgin.
@@ -80,7 +92,16 @@ export const CartModal = ({
   return (
     <>
       <CartModelContainer>
-        <CloseModal onClick={() => toggleCartModal()}>X</CloseModal>
+        <CartHeader>
+          <CloseModal onClick={() => toggleCartModal()}>X</CloseModal>
+        </CartHeader>
+        <CartIconStyle>
+          <CartIcon
+            toggleCartModal={undefined}
+            itemsCountsInTheCart={store.cartItems.length}
+          />{" "}
+          <p>Cart</p>
+        </CartIconStyle>
         <CartList>
           <TableStyling>
             <tbody>
@@ -98,6 +119,7 @@ export const CartModal = ({
             </tbody>
           </TableStyling>
         </CartList>
+        <SubTotal>SubTotal: {store.cartSubTotal} </SubTotal>
         <Checkout
           onClick={() => handleBuyNow(store.cartItems.length)}
           disabled={store.cartItems.length <= 0}
