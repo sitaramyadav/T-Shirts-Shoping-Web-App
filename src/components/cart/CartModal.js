@@ -112,7 +112,7 @@ export const CartModal = ({
                       product={product}
                       index={index}
                       key={`${index}`}
-                      manageCartItemsHandler={manageCartItemsHandler}
+                      removeCartItem={manageCartItemsHandler}
                     />
                   );
                 })}

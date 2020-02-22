@@ -1,5 +1,5 @@
 import React from "react";
-import { UPDATE_CART, REMOVE_FROM_CART } from "../../Constants";
+import { REMOVE_FROM_CART } from "../../Constants";
 const images = require.context("../../../images/products", true);
 
 import {
@@ -7,11 +7,10 @@ import {
   TableData,
   ProductInfo,
   ProductDetail,
-  PriceSection,
-  Icon
+  PriceSection
 } from "./CartItemStyle";
 
-export const CartItem = ({ product, index, manageCartItemsHandler }) => {
+export const CartItem = ({ product, index, removeCartItem }) => {
   const imageName = product.src_2.split("/")[2];
   let img = images("./" + imageName);
   console.log(img, "image");
@@ -37,7 +36,7 @@ export const CartItem = ({ product, index, manageCartItemsHandler }) => {
         <PriceSection>
           <p
             onClick={() => {
-              manageCartItemsHandler({
+              removeCartItem({
                 type: REMOVE_FROM_CART,
                 payload: {
                   id: product.id,
