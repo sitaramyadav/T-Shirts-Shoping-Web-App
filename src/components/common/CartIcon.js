@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import cartIconSrc from "../../../images/icons/cart.png";
+import cartIconSrc from "../../../images/Icons/cart.png";
 import { CartIconCounter } from "./CartIconCounter";
 
 const CartIconContainer = styled.picture`
